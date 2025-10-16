@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>xam - Chat</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-header">
+      <button id="backBtn">←</button>
+      <div class="chat-user-info" id="chatUserInfo">
+        <div class="chat-user-avatar" id="chatUserAvatar"></div>
+        <div class="chat-user-details">
+          <div class="chat-user-name" id="chatUserName"></div>
+          <div class="chat-user-status">Online</div>
+        </div>
+      </div>
+      <div class="chat-actions">
+        <button id="voiceCallBtn" title="Voice Call">📞</button>
+        <button id="videoCallBtn" title="Video Call">📹</button>
+        <button id="favoriteBtn" title="Add to Favorites">⭐</button>
+      </div>
+    </div>
+    <div class="chat-messages" id="messages"></div>
+    <div class="chat-input">
+      <input type="file" id="fileInput" accept="image/*,video/*,.pdf,.doc,.docx,.txt,audio/*" style="display: none;" />
+      <button id="attachBtn" title="Attach file">📎</button>
+      <button id="voiceBtn" title="Record voice message">🎤</button>
+      <input type="text" id="messageInput" placeholder="Type a message..." />
+      <button id="sendBtn">Send</button>
+    </div>
+    <!-- Attachment preview modal -->
+    <div id="attachmentPreview" class="attachment-preview" style="display: none;">
+      <div class="preview-content">
+        <div class="preview-header">
+          <button id="closePreviewBtn">×</button>
+        </div>
+        <div class="preview-body">
+          <div id="previewMedia"></div>
+          <input type="text" id="attachmentCaption" placeholder="Add a caption..." />
+        </div>
+        <div class="preview-footer">
+          <button id="sendAttachmentBtn">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/chat.js"></script>
+</body>
+</html>

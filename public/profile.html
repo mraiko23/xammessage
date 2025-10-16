@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>xam - Profile</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="profile-container">
+    <div class="profile-header">
+      <button id="backBtn">← Back</button>
+      <h2>Profile</h2>
+    </div>
+    <div class="profile-content">
+      <div class="profile-avatar-section">
+        <div class="profile-avatar" id="profileAvatar"></div>
+        <input type="file" id="avatarInput" accept="image/*" style="display: none;" />
+        <button id="changeAvatarBtn">Change Avatar</button>
+      </div>
+      <div class="profile-info">
+        <div class="profile-field">
+          <label for="username">Username</label>
+          <input type="text" id="username" readonly />
+        </div>
+        <div class="profile-field">
+          <label for="description">Description</label>
+          <textarea id="description" placeholder="Tell something about yourself..."></textarea>
+        </div>
+        <button id="saveBtn">Save Changes</button>
+      </div>
+    </div>
+  </div>
+  <script src="js/profile.js"></script>
+</body>
+</html>

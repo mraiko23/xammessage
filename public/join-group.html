@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Join Group - xam</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="join-group-form">
+      <h2>Join Group</h2>
+      <div id="groupInfo">
+        <div class="group-avatar" id="groupAvatar">👥</div>
+        <div class="group-details">
+          <h3 id="groupName">Loading...</h3>
+          <p id="groupDescription">Loading group information...</p>
+        </div>
+      </div>
+      <button id="joinBtn" class="btn primary">Join Group</button>
+      <div id="message" class="message"></div>
+    </div>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const groupId = urlParams.get('groupId');
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      window.location.href = '/';
+    }
+
+    if (!groupId) {
+      document.getElementById('message').textContent = 'Invalid invite link';
+      document.getElementById('message').className = 'message error';
+      document.getElementById('joinBtn').style.display = 'none';
+    } else {
+      // Load group information
+      fetch(`/api/groups`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+      .then(response => response.json())
+      .then(groups => {
+        const group = groups.find(g => g.id === groupId);
+        if (group) {
+          document.getElementById('groupName').textContent = group.name;
+          document.getElementById('groupDescription').textContent = group.description || 'No description';
+          if (group.avatar) {
+            document.getElementById('groupAvatar').style.backgroundImage = `url(${group.avatar})`;
+            document.getElementById('groupAvatar').textContent = '';
+          }
+        } else {
+          document.getElementById('message').textContent = 'Group not found';
+          document.getElementById('message').className = 'message error';
+          document.getElementById('joinBtn').style.display = 'none';
+        }
+      })
+      .catch(error => {
+        console.error('Error loading group:', error);
+        document.getElementById('message').textContent = 'Error loading group information';
+        document.getElementById('message').className = 'message error';
+      });
+    }
+
+    document.getElementById('joinBtn').addEventListener('click', () => {
+      fetch(`/api/groups/${groupId}/join`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.message) {
+          document.getElementById('message').textContent = 'Successfully joined the group!';
+          document.getElementById('message').className = 'message success';
+          document.getElementById('joinBtn').style.display = 'none';
+
+          // Redirect to contacts after a short delay
+          setTimeout(() => {
+            window.location.href = '/contacts.html';
+          }, 2000);
+        } else {
+          document.getElementById('message').textContent = data.error || 'Failed to join group';
+          document.getElementById('message').className = 'message error';
+        }
+      })
+      .catch(error => {
+        console.error('Error joining group:', error);
+        document.getElementById('message').textContent = 'Error joining group';
+        document.getElementById('message').className = 'message error';
+      });
+    });
+  </script>
+</body>
+</html>

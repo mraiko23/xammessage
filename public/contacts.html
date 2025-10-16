@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>xam - Chats</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <div class="user-profile" id="userProfile">
+          <div class="user-avatar" id="sidebarAvatar"></div>
+          <div class="user-info">
+            <div class="user-name" id="sidebarUsername"></div>
+            <div class="user-status">Online</div>
+          </div>
+        </div>
+        <div class="sidebar-actions">
+          <button id="createGroupBtn" title="Create Group">➕</button>
+          <button id="profileBtn" title="Profile">👤</button>
+          <button id="logoutBtn" title="Logout">🚪</button>
+        </div>
+      </div>
+      <div class="sidebar-nav">
+        <button id="chatsTab" class="nav-tab active">💬 Chats</button>
+        <button id="favoritesTab" class="nav-tab">⭐ Favorites</button>
+      </div>
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search chats...">
+      </div>
+      <div class="chats-list" id="chatsList">
+        <!-- Chats will be loaded here -->
+      </div>
+    </div>
+    <div class="main-content">
+      <div class="welcome-screen">
+        <div class="welcome-icon">💬</div>
+        <h1>Welcome to xam</h1>
+        <p>Select a chat to start messaging</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Create Group Modal -->
+  <div id="createGroupModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Create New Group</h3>
+        <button id="closeCreateGroupModalBtn">×</button>
+      </div>
+      <div class="modal-body">
+        <input type="text" id="groupNameInput" placeholder="Group name" required />
+        <textarea id="groupDescriptionInput" placeholder="Group description (optional)"></textarea>
+        <button id="createGroupConfirmBtn">Create Group</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/contacts.js"></script>
+</body>
+</html>

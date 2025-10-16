@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>xam - Call</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="call-container">
+    <div class="call-header">
+      <div class="call-info">
+        <div class="call-user-avatar" id="callUserAvatar"></div>
+        <div class="call-user-details">
+          <div class="call-user-name" id="callUserName"></div>
+          <div class="call-status" id="callStatus">Calling...</div>
+        </div>
+      </div>
+      <div class="call-actions">
+        <button id="addParticipantBtn" title="Add Participant">👥</button>
+        <button id="shareLinkBtn" title="Share Link">🔗</button>
+      </div>
+    </div>
+
+    <div class="call-video-area">
+      <video id="localVideo" autoplay muted></video>
+      <video id="remoteVideo" autoplay></video>
+      <div id="callWaiting" class="call-waiting">
+        <div class="waiting-avatar" id="waitingAvatar"></div>
+        <div class="waiting-text">Waiting for participant...</div>
+      </div>
+    </div>
+
+    <div class="call-controls">
+      <button id="muteBtn" class="control-btn" title="Mute/Unmute">🎤</button>
+      <button id="videoBtn" class="control-btn" title="Camera On/Off">📹</button>
+      <button id="endCallBtn" class="control-btn end-call" title="End Call">📞</button>
+    </div>
+
+    <!-- Add participant modal -->
+    <div id="addParticipantModal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Add Participant</h3>
+          <button id="closeModalBtn">×</button>
+        </div>
+        <div class="modal-body">
+          <input type="text" id="participantUsername" placeholder="Enter username" />
+          <button id="addParticipantConfirmBtn">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Share link modal -->
+    <div id="shareLinkModal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Share Call Link</h3>
+          <button id="closeShareModalBtn">×</button>
+        </div>
+        <div class="modal-body">
+          <input type="text" id="callLinkInput" readonly />
+          <button id="copyLinkBtn">Copy Link</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/call.js"></script>
+</body>
+</html>
